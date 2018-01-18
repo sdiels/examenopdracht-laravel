@@ -9,8 +9,10 @@
                 
                 <div class="contentCont panel-body">
                     <ul class="article-overview">
-                       
-                        <li>
+                      
+                      @foreach ($posts as $post)
+                      
+                      <li>
                             <div class="vote">
                                
                                 <div class="form-inline upvote">
@@ -23,76 +25,27 @@
                             </div>
 
                             <div class="url">
-                                <a href="http://arstechnica.com/gaming/2016/07/scythe-the-most-hyped-board-game-of-2016-delivers/" class="urlTitle">Scythe, the most-hyped board game of 2016, delivers</a>
+                                <a href="{{$post->url}}" class="urlTitle">{{$post->title}}</a>
                             </div>
 
                             <div class="info">
-                                2 points | posted by Tomte | <a href="comments/1">2 comments</a>
+                                {{$post->points}} points | posted by {{$post->user->name}} | <a href="comments/{{$post->id}}">{{count($post->comments)}} comments</a>
                             </div>
+                            
+                            @auth
+                            @if ($post->user_id === Auth::user()->id)
+                            <a href="/post/edit/{{$post->id}}" class="btn btn-primary btn-xs edit-btn">edit</a>
+                            <form action="/post/delete/{{$post->id}}" method="post">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <button type="submit" class="btn btn-primary btn-xs edit-btn">Delete</button>
+                            </form>
+                            @endif
+                            @endauth
+                            
                         </li>
                         
-                        <li>
-                            <div class="vote">
-                               
-                                <div class="form-inline upvote">
-                                    <i class="fa fa-btn fa-caret-up disabled upvote" title="You need to be logged in to upvote"></i>
-                                </div>
-
-                                <div class="form-inline upvote">
-
-                                    <i class="fa fa-btn fa-caret-down disabled downvote" title="You need to be logged in to downvote"></i>
-
-                                </div>
-                            </div>
-
-                            <div class="url">
-                                <a href="https://pragprog.com/the-pragmatic-programmer/extracts/tips" class="urlTitle">Tips from the Pragmatic Programmer (2000)</a>
-                            </div>
-
-                            <div class="info">
-                                1 point | posted by gasul | <a href="comments/2">1 comment</a>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="vote">
-                                <div class="form-inline upvote">
-                                    <i class="fa fa-btn fa-caret-up disabled upvote" title="You need to be logged in to upvote"></i>
-                                </div>
-
-                                <div class="form-inline upvote">
-                                    <i class="fa fa-btn fa-caret-down disabled downvote" title="You need to be logged in to downvote"></i>
-                                </div>
-                            </div>
-
-                            <div class="url">
-                                <a href="https://blog.mozilla.org/security/2016/08/01/enhancing-download-protection-in-firefox/" class="urlTitle">Enhancing Download Protection in Firefox</a>
-                            </div>
-
-                            <div class="info">
-                                0 points | posted by eto3 | <a href="comments/4">1 comment</a>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="vote">
-                                <div class="form-inline upvote">
-                                    <i class="fa fa-btn fa-caret-up disabled upvote" title="You need to be logged in to upvote"></i>
-                                </div>
-
-                                <div class="form-inline upvote">
-                                    <i class="fa fa-btn fa-caret-down disabled downvote" title="You need to be logged in to downvote"></i>
-                                </div>
-                            </div>
-                            <div class="url">
-                                <a href="https://youtube-eng.blogspot.com/2016/08/youtubes-road-to-https.html" class="urlTitle">YouTube's road to HTTPS</a>
-                            </div>
-
-                            <div class="info">
-                                -1 point | posted by gasul | <a href="comments/3">0 comments</a>
-                            </div>
-
-                        </li>
+                        @endforeach
 
                     </ul>
 
