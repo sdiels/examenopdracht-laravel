@@ -5,18 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Post extends Model
+class Point extends Model
 {
     use SoftDeletes;
     
-    protected $fillable = ['title', 'url', 'points'];
+    protected $fillable = ['point', 'post_id', 'user_id'];
     
-    public function Comments() {
-        return $this->hasMany(Comment::class);
-    }
-    
-    public function Points() {
-        return $this->hasMany(Point::class);
+    public function Post() {
+        return $this->belongsTo(Post::class);
     }
     
     public function User() {
@@ -24,5 +20,4 @@ class Post extends Model
     }
     
     protected $dates = ['deleted_at'];
-    
 }

@@ -51,6 +51,21 @@ li {
     margin-bottom: 20px;
 }
 
+.post > div {
+    float: left;
+}
+.post {
+    margin-bottom: 10px;
+    padding-top: 10px;
+    border-top: 1px #afafaf solid;
+}
+.post:first-child {
+    border: none;
+}
+.vote {
+    margin-right: 20px;
+}
+
 /*****************************************************************
           CLEARFIX
 *****************************************************************/

@@ -28,3 +28,6 @@ Route::delete('/post/delete/{id}', 'MainController@postDelete');
 Route::get('/post/edit/{id}', 'MainController@postEdit');
 Route::put('/post/update/{id}', 'MainController@postUpdate');
 
+Route::get('/upvote/{postid}/{userid}', 'MainController@upvote');
+Route::get('/downvote/{postid}/{userid}', 'MainController@downvote');
+
